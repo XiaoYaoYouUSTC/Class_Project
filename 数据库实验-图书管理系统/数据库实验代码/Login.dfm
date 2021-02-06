@@ -1,0 +1,74 @@
+object LoginForm: TLoginForm
+  Left = 194
+  Top = 204
+  Width = 1114
+  Height = 675
+  Caption = #30331#24405
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 119
+  TextHeight = 16
+  object Label1: TLabel
+    Left = 352
+    Top = 176
+    Width = 65
+    Height = 16
+    AutoSize = False
+    Caption = #23398#24037#21495
+  end
+  object Label2: TLabel
+    Left = 360
+    Top = 240
+    Width = 57
+    Height = 16
+    AutoSize = False
+    Caption = #23494#30721
+  end
+  object Edit1: TEdit
+    Left = 440
+    Top = 176
+    Width = 217
+    Height = 24
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    Left = 440
+    Top = 240
+    Width = 217
+    Height = 24
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 464
+    Top = 304
+    Width = 65
+    Height = 33
+    Caption = #30331#24405
+    TabOrder = 2
+    OnClick = Button1Click
+  end
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=SQLOLEDB.1;Password=student;Persist Security Info=True;' +
+      'User ID=student;Initial Catalog=student;Data Source=202.38.88.99' +
+      ',1434'
+    LoginPrompt = False
+    Provider = 'SQLOLEDB.1'
+    Left = 16
+    Top = 24
+  end
+  object ADOQuery1: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    SQL.Strings = (
+      'select * from PB18000051student where '#23398#24037#21495'='#39'PB18000021'#39)
+    Left = 56
+    Top = 24
+  end
+end

@@ -1,0 +1,3 @@
+﻿  sortInput.cpp
+E:\36-陈俊驰-PB18000051-project\ex1\src\sortInput\sortInput.cpp(18,13): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+  sortInput.vcxproj -> E:\36-陈俊驰-PB18000051-project\ex1\src\sortInput\Debug\sortInput.exe

@@ -1,0 +1,3 @@
+每一个文件夹对应一个visual studio所生成的项目，为方便助教检查，对应的cpp已经拷贝出来，直接放在了src文件夹下。
+其中sortInput是用于生成input.txt的代码，其余为排序代码。
+visual studio 将项目文件夹作为地址的基准，故直接运行Debug文件夹exe会出问题，需要通过打开该项目，在vs中运行。

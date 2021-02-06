@@ -1,0 +1,553 @@
+unit Manager;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, Grids, DBGrids, Menus, StdCtrls, DB, ADODB;
+
+type
+  TManagerForm = class(TForm)
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N4: TMenuItem;
+    SearchPage: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    ActionPage: TPageControl;
+    CountPage: TPageControl;
+    Label1: TLabel;
+    Order1: TComboBox;
+    Label2: TLabel;
+    ComboBox1: TComboBox;
+    ADOQuery1: TADOQuery;
+    DataSource1: TDataSource;
+    ADOConnection1: TADOConnection;
+    Button1: TButton;
+    DBGrid5: TDBGrid;
+    Label3: TLabel;
+    ComboBox2: TComboBox;
+    Label4: TLabel;
+    ComboBox3: TComboBox;
+    Label5: TLabel;
+    ComboBox4: TComboBox;
+    Label6: TLabel;
+    ComboBox5: TComboBox;
+    DBGrid1: TDBGrid;
+    Label7: TLabel;
+    ComboBox6: TComboBox;
+    Label8: TLabel;
+    ComboBox7: TComboBox;
+    Label9: TLabel;
+    ComboBox8: TComboBox;
+    Label10: TLabel;
+    ComboBox9: TComboBox;
+    Button4: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    Button6: TButton;
+    TabSheet6: TTabSheet;
+    TabSheet7: TTabSheet;
+    TabSheet8: TTabSheet;
+    TabSheet9: TTabSheet;
+    TabSheet10: TTabSheet;
+    TabSheet11: TTabSheet;
+    Label11: TLabel;
+    ComboBox10: TComboBox;
+    Label12: TLabel;
+    ComboBox11: TComboBox;
+    Button5: TButton;
+    Label13: TLabel;
+    ComboBox12: TComboBox;
+    Label14: TLabel;
+    ComboBox13: TComboBox;
+    Button7: TButton;
+    Label15: TLabel;
+    ComboBox14: TComboBox;
+    Label16: TLabel;
+    ComboBox15: TComboBox;
+    Button8: TButton;
+    TabSheet12: TTabSheet;
+    TabSheet13: TTabSheet;
+    Label17: TLabel;
+    Edit1: TEdit;
+    Label18: TLabel;
+    Edit2: TEdit;
+    Button9: TButton;
+    TabSheet14: TTabSheet;
+    Label19: TLabel;
+    Label20: TLabel;
+    ComboBox16: TComboBox;
+    ComboBox17: TComboBox;
+    Button10: TButton;
+    TabSheet15: TTabSheet;
+    Label21: TLabel;
+    Edit3: TEdit;
+    Label22: TLabel;
+    Button11: TButton;
+    Label23: TLabel;
+    Edit4: TEdit;
+    Label24: TLabel;
+    Button12: TButton;
+    DBGrid2: TDBGrid;
+    Button13: TButton;
+    Button14: TButton;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label27: TLabel;
+    Label28: TLabel;
+    Edit5: TEdit;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Edit8: TEdit;
+    Label29: TLabel;
+    ADOTable1: TADOTable;
+    DBGrid3: TDBGrid;
+    DataSource2: TDataSource;
+    Button15: TButton;
+    TabSheet16: TTabSheet;
+    Label30: TLabel;
+    Label31: TLabel;
+    Edit9: TEdit;
+    Edit10: TEdit;
+    Button16: TButton;
+    ADOTable2: TADOTable;
+    DataSource3: TDataSource;
+    DBGrid4: TDBGrid;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label37: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    Edit11: TEdit;
+    Edit12: TEdit;
+    Edit13: TEdit;
+    Edit14: TEdit;
+    Edit15: TEdit;
+    Edit16: TEdit;
+    Edit17: TEdit;
+    Edit18: TEdit;
+    Button17: TButton;
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
+    procedure Button12Click(Sender: TObject);
+    procedure Button13Click(Sender: TObject);
+    procedure Button14Click(Sender: TObject);
+    procedure Button15Click(Sender: TObject);
+    procedure Button16Click(Sender: TObject);
+    procedure Button17Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ManagerForm: TManagerForm;
+
+implementation
+
+uses Login;
+
+{$R *.dfm}
+
+procedure TManagerForm.N1Click(Sender: TObject);
+begin
+  ActionPage.hide;
+  CountPage.hide;
+  SearchPage.show;
+  DBGrid1.show;
+  adoquery1.close;
+end;
+
+procedure TManagerForm.N2Click(Sender: TObject);
+begin
+    SearchPage.hide;
+    CountPage.hide;
+    DBGrid1.hide;
+    ActionPage.show;
+    adoquery1.close;
+end;
+
+procedure TManagerForm.N4Click(Sender: TObject);
+begin
+    ActionPage.hide;
+    SearchPage.hide;
+    DBGrid1.show;
+    CountPage.show;
+    adoquery1.close;
+end;
+
+procedure TManagerForm.Button1Click(Sender: TObject);
+var
+s:string;
+begin
+begin
+  s:='select * from PB18000051book order by ';
+  s:=s+ ComboBox1.text;
+  if(order1.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end
+end;
+
+procedure TManagerForm.Button4Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select * from PB18000051specificbook order by ';
+  s:=s+ ComboBox7.text;
+  if(ComboBox6.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button2Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select * from PB18000051student order by ';
+  s:=s+ ComboBox3.text;
+  if(ComboBox2.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button3Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select * from PB18000051buy order by ';
+  s:=s+ ComboBox5.text;
+  if(ComboBox4.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button6Click(Sender: TObject);
+var
+s:string;
+begin
+s:='select * from PB18000051elim order by ';
+  s:=s+ ComboBox9.text;
+  if(ComboBox8.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button5Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select IBSN,书名,库存数量,剩余数量 from PB18000051book order by ';
+  s:=s+ ComboBox11.text;
+  if(ComboBox10.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button7Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select IBSN,采购数量=sum(采购数量) from PB18000051buy group by IBSN order by ';
+  if(ComboBox13.text='IBSN') then
+    s:=s+'IBSN'
+  else
+    s:=s+'sum(采购数量)';
+  if(ComboBox12.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+
+end;
+
+procedure TManagerForm.Button8Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select IBSN,淘汰数量=count(*) from PB18000051elim group by IBSN order by ';
+  if(ComboBox15.text='IBSN') then
+    s:=s+'IBSN'
+  else
+    s:=s+'count(*)';
+  if(ComboBox14.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button9Click(Sender: TObject);
+var
+s:string;
+text1:string;
+text2:string;
+begin
+  text1:=edit1.text;
+  text2:=edit2.text;
+  s:='select * from PB18000051book ';
+  if (length(text1)=0)and (length(text2)<>0) then
+    s:=s+'where 作者='''+text2+'''';
+  if (length(text1)<>0) and (length(text2)=0)then
+    s:=s+'where 书名='''+text1+'''';
+  if (length(text1)<>0) and (length(text2)<>0) then
+    s:=s+'where 作者='''+text2+''' and 书名='''+text1+'''';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+  if(adoquery1.RecordCount =0)then
+    showmessage('很抱歉，本馆没有您所查询的图书');
+  edit1.text:='';
+  edit2.text:='';
+end;
+
+procedure TManagerForm.Button10Click(Sender: TObject);
+var
+s:string;
+begin
+  s:='select IBSN,条码号,学工号,借阅时间,应还时间 from PB18000051specificbook where 是否归还=''否'' order by ';
+  s:=s+ComboBox11.text;
+  if(ComboBox10.text='升序') then
+    s:=s+' ASC'
+  else s:=s+' DESC';
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add(s);
+  adoquery1.open;
+end;
+
+procedure TManagerForm.Button11Click(Sender: TObject);
+var
+s:string;
+IBSN:string;
+begin
+    adoquery1.Close;
+    adoquery1.sql.Clear;
+    adoquery1.sql.add('select IBSN from PB18000051specificbook where 条码号='''+edit3.Text+'''');
+    adoquery1.Open;
+    IBSN:=adoquery1.FieldByName('IBSN').AsString;
+    if(adoquery1.recordcount<>0)then
+    begin
+      try
+      begin
+        adoquery1.close;
+        adoquery1.SQL.clear;
+        adoquery1.SQL.add('Update PB18000051specificbook set 学工号='''+LoginForm.edit1.Text+''',借阅时间=getdate(),应还时间=dateadd(dd,30,getdate()),是否归还=''否'' where 条码号='''+edit3.Text+'''');
+        adoquery1.SQL.Add(#13);
+        adoquery1.SQL.Add('update PB18000051book set 剩余数量=剩余数量-1 where IBSN='''+IBSN+'''');
+        adoquery1.SQL.add(#13);
+        adoquery1.SQL.ADD('update PB18000051student set 已借数目=已借数目+1 where 学工号='''+LoginForm.edit1.Text+'''');
+        adoquery1.execsql;
+        showmessage('借阅成功');
+      end
+      except
+        showmessage('借阅失败');
+      end
+    end
+    else
+      showmessage('不存在该条码号');
+    edit3.Text:='';
+end;
+
+procedure TManagerForm.Button12Click(Sender: TObject);
+var
+s:string;
+IBSN:string;
+begin
+    adoquery1.Close;
+    adoquery1.sql.Clear;
+    adoquery1.sql.add('select IBSN from PB18000051specificbook where 条码号='''+edit4.Text+'''');
+    adoquery1.Open;
+    IBSN:=adoquery1.FieldByName('IBSN').AsString;
+    if(adoquery1.recordcount<>0)then
+    begin
+      try
+      begin
+        adoquery1.close;
+        adoquery1.SQL.clear;
+        adoquery1.SQL.add('Update PB18000051specificbook set 学工号=NULL,借阅时间=NULL,应还时间=NULL,是否归还=''是'' where 条码号='''+edit4.Text+'''');
+        adoquery1.SQL.Add(#13);
+        adoquery1.SQL.Add('update PB18000051book set 剩余数量=剩余数量+1 where IBSN='''+IBSN+'''');
+        adoquery1.SQL.add(#13);
+        adoquery1.SQL.ADD('update PB18000051student set 已借数目=已借数目-1 where 学工号='''+LoginForm.edit1.Text+'''');
+        adoquery1.execsql;
+        showmessage('归还成功');
+      end
+      except
+        showmessage('归还失败');
+      end
+    end
+    else
+      showmessage('不存在该条码号');
+    edit4.text:='';
+end;
+
+procedure TManagerForm.Button13Click(Sender: TObject);
+begin
+     adoquery1.Close;
+     adoquery1.SQL.Clear;
+     adoquery1.SQL.Add('select * from PB18000051specificbook where 学工号='''+LoginForm.Edit1.text+'''');
+     adoquery1.open;
+end;
+
+procedure TManagerForm.Button14Click(Sender: TObject);
+begin
+  ManagerForm.Hide;
+  LoginForm.Edit1.text:='';
+  LoginForm.edit2.text:='';
+  LoginForm.Show;
+end;
+
+procedure TManagerForm.Button15Click(Sender: TObject);
+var
+s:string;
+IBSN:string;
+buynum:string;
+i:integer;
+spenum:integer;
+begin
+  adoquery1.Close;
+  adoquery1.SQL.Clear;
+  adoquery1.sql.add('select * from PB18000051buy');
+  adoquery1.open;
+  buynum:=StringofChar('0',10-length(inttostr(adoquery1.recordcount)))+inttostr(adoquery1.recordcount);
+
+  adoquery1.Close;
+  adoquery1.SQL.Clear;
+  adoquery1.sql.add('select * from PB18000051specificbook');
+  adoquery1.open;
+  spenum:=adoquery1.recordcount;
+
+  adoquery1.Close;
+  adoquery1.SQL.Clear;
+  adoquery1.sql.add('select * from PB18000051elim');
+  adoquery1.open;
+  spenum:=spenum+adoquery1.recordcount;
+
+  adoquery1.close;
+  adoquery1.sql.clear;
+  adoquery1.sql.add('insert into PB18000051buy values('''+buynum+''','''+edit5.text+''',getdate(),'+edit6.text+','+edit7.text+','''+edit8.text+''')');
+  adoquery1.SQL.add(#13);
+  adoquery1.SQL.add('update PB18000051book set 库存数量=库存数量+'+edit6.text+',剩余数量=剩余数量+'+edit6.text+' where IBSN='''+edit5.Text+'''');
+  adoquery1.SQL.add(#13);
+  i:=1;
+  while(i<=strtoint(edit6.text))do
+  begin
+      adoquery1.SQL.add('insert into PB18000051specificbook(IBSN,条码号,是否归还) values('''+edit5.text+''','''+StringofChar('0',10-length(inttostr(spenum+i)))+inttostr(spenum+i)+''',''是'')');
+      adoquery1.SQL.Add(#13);
+      i:=i+1;
+  end;
+  adoquery1.ExecSQL;
+  edit5.text:='';
+  edit6.text:='';
+  edit7.text:='';
+  edit8.text:='';
+  showmessage('提交采购信息成功');
+  adotable1.close;
+  adotable1.Open;
+end;
+
+procedure TManagerForm.Button16Click(Sender: TObject);
+var
+IBSN:string;
+elimnum:string;
+begin
+  adoquery1.Close;
+  adoquery1.sql.Clear;
+  adoquery1.sql.add('select IBSN from PB18000051specificbook where 条码号='''+edit9.Text+'''');
+  adoquery1.Open;
+  IBSN:=adoquery1.FieldByName('IBSN').AsString;
+
+  adoquery1.Close;
+  adoquery1.SQL.Clear;
+  adoquery1.sql.add('select * from PB18000051elim');
+  adoquery1.open;
+  elimnum:=StringofChar('0',10-length(inttostr(adoquery1.recordcount)))+inttostr(adoquery1.recordcount);
+
+  adoquery1.Close;
+  adoquery1.sql.clear;
+  adoquery1.SQL.Add('update PB18000051book set 库存数量=库存数量-1,剩余数量=剩余数量-1 where IBSN='''+IBSN+'''');
+  adoquery1.SQL.add(#13);
+  adoquery1.sql.add('delete from PB18000051specificbook where 条码号='''+edit9.text+'''');
+  adoquery1.sql.Add(#13);
+  adoquery1.sql.add('insert into PB18000051elim values('''+elimnum+''','''+IBSN+''','''+edit9.Text+''',getdate(),'''+edit10.Text+''')');
+  adoquery1.ExecSQL;
+  showmessage('提交淘汰信息成功');
+  edit9.text:='';
+  edit10.text:='';
+  adotable2.Close;
+  adotable2.open;
+end;
+
+procedure TManagerForm.Button17Click(Sender: TObject);
+var
+s:string;
+begin
+  adoquery1.Close;
+  adoquery1.sql.clear;
+  s:='insert into PB18000051book values('''+edit11.text+''','''+edit12.text+''','''+edit13.text;
+  s:=s+''','''+edit14.text+''','''+edit15.text+''','''+edit16.text+''','+edit17.text+','+edit18.text+',0,0)';
+  adoquery1.SQL.add(s);
+  adoquery1.execsql;
+  showmessage('录入数据成功');
+  edit11.text:='';
+  edit12.text:='';
+  edit13.text:='';
+  edit14.text:='';
+  edit15.text:='';
+  edit16.text:='';
+  edit17.text:='';
+  edit18.text:='';
+end;
+
+end.
